@@ -30,12 +30,14 @@ function Register() {
     },
     onSubmit: async (values) => {
       try {
-        const loginResp = await axios.post(
-          `${import.meta.env.VITE_API}/login`,
-          values
+        await axios.post(
+          `${import.meta.env.VITE_API}/register`,
+          {
+            email : values.email,
+            password : values.password
+          }
         );
-        window.localStorage.setItem("app_token",loginResp.data.token);
-        navigate("/home")
+        navigate("/")
       } catch (error) {
         if (error.status) {
           alert(error.response.data.email);
